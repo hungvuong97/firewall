@@ -357,20 +357,20 @@ include 'include/header.php';
                                                                             </tr>
                                                                             <tr>
                                                                                 <td><label style="width: 120px" for="input_IP1">Địa chỉ IP nguồn:</label></td>
-                                                                                <td><input placeholder="Nhập địa chỉ (VD: 192.168.2.22)" value="<?=$_SESSION['val']['ip1']?>" type="text"  class="form-control" id="input_ip1" name="ip1"></td>
+                                                                                <td><input placeholder="Nhập địa chỉ (VD: 192.168.2.22)" value="<?=$_SESSION['va1']['ip3']?>" type="text"  class="form-control" id="input_ip1" name="ip1"></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td><label style="width: 170px" for="pwd">Cổng dịch vụ nguồn:</label></td>
                                                                                 <td><input placeholder="Nhập cổng (VD: 80,80:88)"
-                                                                                 value="<?=$_SESSION['val']['port1']?>" type="text" class="form-control" id="input_port1" name="port1"></td>
+                                                                                 value="<?=$_SESSION['val1']['port1']?>" type="text" class="form-control" id="input_port1" name="port1"></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td><label style="width: 120px" for="input_IP1">Địa chỉ IP đích:</label></td>
-                                                                                <td><input placeholder="Nhập địa chỉ (VD: 192.168.2.22)" value="<?=$_SESSION['val']['ip2']?>" type="text" class="form-control" id="input_ip2" name="ip2"></td>
+                                                                                <td><input placeholder="Nhập địa chỉ (VD: 192.168.2.22)" value="<?=$_SESSION['val1']['ip4']?>" type="text" class="form-control" id="input_ip2" name="ip2"></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td><label style="width: 170px" for="pwd">Cổng dịch vụ đích:</label></td>
-                                                                                <td><input placeholder="Nhập cổng (VD: 80,80:88)" value="<?=$_SESSION['val']['port2']?>" type="text" class="form-control" id="input_port2" name="port2"></td>
+                                                                                <td><input placeholder="Nhập cổng (VD: 80,80:88)" value="<?=$_SESSION['val1']['port4']?>" type="text" class="form-control" id="input_port2" name="port2"></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td></td>
@@ -390,24 +390,24 @@ include 'include/header.php';
                                                                                     <input type="checkbox" class="form-check-input" id="checklog1" onclick="checklog()" style="margin-top: 7px;">
                                                                                     <label style="margin-left: 15px;" for="input_IP1">Prefix</label>
                                                                                 </td>
-                                                                                <td><input id="prefix1" value="<?=$_SESSION['val']['[prefix']?>" type="text" disabled class="form-control" id="input_prefix" name="prefix"></td>
+                                                                                <td><input id="prefix1" value="<?=$_SESSION['val1']['[prefix1']?>" type="text" disabled class="form-control" id="input_prefix" name="prefix"></td>
                                                                             </tr>
 
                                                                         </tbody>
                                                                     </table>
 
                                                                     <p style="color: red">
-                                                                        <?=$_SESSION['ip1Error']?>
+                                                                        <?=$_SESSION['ip3Error']?>
                                                                     </p>
                                                                     <p style="color: red">
-                                                                        <?=$_SESSION['port1Error']?>
+                                                                        <?=$_SESSION['port3Error']?>
                                                                     </p>
 
                                                                     <p style="color: red">
-                                                                        <?=$_SESSION['ip2Error']?>
+                                                                        <?=$_SESSION['ip4Error']?>
                                                                     </p>
                                                                     <p style="color: red">
-                                                                        <?=$_SESSION['port2Error']?>
+                                                                        <?=$_SESSION['port4Error']?>
                                                                     </p>
                                                                     <div class="form-inline">
                                                                         <div class="form-group">
@@ -419,12 +419,12 @@ include 'include/header.php';
                                           <input type="text" style="width: 340px" class="form-control" id="input_port" placeholder="port" name="port">
                                         </div> -->
                                                                         <p style="color: red">
-                                                                            <?=$_SESSION['portError']?>
+                                                                            <?=$_SESSION['portError1']?>
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                                 <p style="color: red">
-                                                                    <?=$_SESSION['prefixError']?>
+                                                                    <?=$_SESSION['prefixError1']?>
                                                                 </p>
                                                                 <button type="submit" class="btn btn-add Disable"><i class="fa fa-plus" aria-hidden="true"></i> Thêm luật</button>
 
@@ -557,16 +557,16 @@ include 'include/header.php';
 
   <ul class="nav nav-tabs" id="example-tabs" role="tablist">
                                             <li class="nav-item margin_center">
-                                                <a id="tab1" class="nav-link active color-a" data-toggle="tab" role="tab" href="#submenu1">Lưu lượng vào</a>
+                                                <a id="tab1" class="nav-link active color-a" data-toggle="tab" role="tab" href="#submenu1">Blacklist Input</a>
                                             </li>
                                             <li class="nav-item margin_center">
-                                                <a id="tab2" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu2">Lưu lượng ra</a>
+                                                <a id="tab2" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu2">Blacklist Output</a>
                                             </li>
                                             <li class="nav-item margin_center">
-                                                <a id="tab1" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu3">Lưu lượng vào</a>
+                                                <a id="tab1" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu3">Whitelist Input</a>
                                             </li>
                                             <li class="nav-item margin_center">
-                                                <a id="tab2" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu4">Lưu lượng ra</a>
+                                                <a id="tab2" class="nav-link color-a" data-toggle="tab" role="tab" href="#submenu4">Whitelist Output</a>
                                             </li>
                                           </ul>  
 <br>
@@ -582,7 +582,7 @@ include 'include/header.php';
       $data = json_decode($string, true);
       // print_r($data);
       $input = $data[0]["chain_rules"];
-      // print_r($input);
+      print_r($input);
       $output =$data[2]['chain_rules'];
       // print(count($data['INPUT']));
       
@@ -597,7 +597,8 @@ include 'include/header.php';
     //   print_r($data1[2]);
       $input1 = $data1[1]["chain_rules"];
       $output1 =$data1[2]['chain_rules'];
-      // print(count($data['INPUT']));
+    //   print_r($input1, $output1)
+      // print_r(count($data['INPUT']));
  
     ?>
   
@@ -618,7 +619,7 @@ include 'include/header.php';
               <?php
                   $i = 0;
                   foreach($input as $key=>$line){
-                    // print($line);
+                    print($line);
                     // break;
                     $ip = "";
                     if(!isset($line['target']['LOG'])){
