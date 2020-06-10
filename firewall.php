@@ -576,16 +576,31 @@ include 'include/header.php';
       $command = "sudo python tool/python-iptables/manual_input.py -L";
       // print_r($command);  
       $string = shell_exec($command);
+    //   print($string);
       // print_r(explode(')',$string)[1]);
       $string = explode(')',$string)[1];
       $data = json_decode($string, true);
       // print_r($data);
-      $input = $data['INPUT'];
+      $input = $data[0]["chain_rules"];
       // print_r($input);
-      $output =$data['OUTPUT'];
+      $output =$data[2]['chain_rules'];
+      // print(count($data['INPUT']));
+      
+      $command1 = "sudo python tool/python-iptables/manual_output.py -L";
+    //   print_r($command);  
+      $string1 = shell_exec($command);
+    //   print($string1);
+    //   print_r(explode(')',$string1)[1]);
+      $string1 = explode(')',$string1)[1];
+    //   print($string1);
+      $data1 = json_decode($string1, true);
+    //   print_r($data1[2]);
+      $input1 = $data1[1]["chain_rules"];
+      $output1 =$data1[2]['chain_rules'];
       // print(count($data['INPUT']));
  
     ?>
+  
     <div id="submenu1" class="tab-pane  in active">
        <table id="processTable" class="table table-hover table-striped">
               <thead class="header-table">
@@ -603,6 +618,8 @@ include 'include/header.php';
               <?php
                   $i = 0;
                   foreach($input as $key=>$line){
+                    // print($line);
+                    // break;
                     $ip = "";
                     if(!isset($line['target']['LOG'])){
                     if(isset($line['iprange']['dst-range'])){
@@ -718,20 +735,7 @@ include 'include/header.php';
        </table>
 
                             </div>
-                            <?php
-      $command = "sudo python tool/python-iptables/manual_output.py -L";
-      // print_r($command);  
-      $string = shell_exec($command);
-      // print_r(explode(')',$string)[1]);
-      $string = explode(')',$string)[1];
-      $data = json_decode($string, true);
-      // print_r($data);
-      $input = $data['INPUT'];
-      // print_r($input);
-      $output =$data['OUTPUT'];
-      // print(count($data['INPUT']));
- 
-    ?>
+                   
                             <div id="submenu3" class="tab-pane fade">
        <table id="processTable" class="table table-hover table-striped">
               <thead class="header-table">
@@ -748,7 +752,7 @@ include 'include/header.php';
               <tbody>
               <?php
                   $i = 0;
-                  foreach($input as $key=>$line){
+                  foreach($input1 as $key=>$line){
                     $ip = "";
                     if(!isset($line['target']['LOG'])){
                     if(isset($line['iprange']['dst-range'])){
@@ -815,7 +819,7 @@ include 'include/header.php';
               <tbody>
               <?php
                   $i = 0;
-                  foreach($input as $key=>$line){
+                  foreach($output1 as $key=>$line){
                     $ip = "";
                     if(!isset($line['target']['LOG'])){
                     if(isset($line['iprange']['dst-range'])){
