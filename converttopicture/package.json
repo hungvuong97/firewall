@@ -1,0 +1,19 @@
+{
+  "name": "converttopicture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "fs": "0.0.1-security",
+    "image-clipper": "^0.4.4",
+    "imagemagick": "^0.1.3",
+    "pdf2pic": "^1.4.0",
+    "sharp": "^0.25.3"
+  }
+}
