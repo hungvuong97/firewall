@@ -168,6 +168,7 @@ include 'config.php';
 	    session_start();
 		
 		$_SESSION['notification']="Thêm luật thành công vào IPS";
+		$_SESSION['rule']  = 'White list';
 		$newURL = HOST."firewall.php";
 		header('Location: '.$newURL);
 	}else{
@@ -182,4 +183,3 @@ include 'config.php';
 		$newURL = HOST."firewall.php";
 		header('Location: '.$newURL);
 	}
-?>
