@@ -30,17 +30,17 @@ def main():
 	group1 = parser.add_mutually_exclusive_group()
 	group2 = parser.add_mutually_exclusive_group()
 	group3 = parser.add_mutually_exclusive_group()
-	group1.add_argument('-I','--insert', type=int, help="""Insert rule in position. Default is location 0, the packet will face this rule first.
+	parser.add_argument('-I','--insert', type=int, help="""Insert rule in position. Default is location 0, the packet will face this rule first.
 							Example : python manual_input.py -I 1 -r "{\"comment\": {\"comment\": \"1\"}, \"protocol\": \"tcp\", \"target\": \"ACCEPT\", \"tcp\": {\"dport\": \"22\"}}"
 							""")
-	group1.add_argument('-A','--append', action="store_true", help=r"""Insert rule in bottom of list (append). Your packet can face this rule after all other rules.
+	parser.add_argument('-A','--append', action="store_true", help=r"""Insert rule in bottom of list (append). Your packet can face this rule after all other rules.
 						Example : python manual_input.py -A -r "{\"comment\": {\"comment\": \"Match tcp.22\"}, \"protocol\": \"tcp\", \"target\": \"ACCEPT\", \"tcp\": {\"dport\": \"22\"}}"
 						""")
-	group1.add_argument('-r','--rule', required=False,type=str,default="", help='Input rule in json type.')
-	group2.add_argument('-f','--flush', action="store_true", help='Clear all rule in this chain INPUT')
-	group2.add_argument('-d','--delete',default=None, type=int, help='Delete specific rule in position of this chain INPUT. Default is the first')
+	parser.add_argument('-r','--rule', required=False,type=str,default="", help='Input rule in json type.')
+	parser.add_argument('-f','--flush', action="store_true", help='Clear all rule in this chain INPUT')
+	parser.add_argument('-d','--delete',default=None, type=int, help='Delete specific rule in position of this chain INPUT. Default is the first')
 	
-	group3.add_argument('-L','--listrule', action="store_true", help='Get all rules in json type.')
+	parser.add_argument('-L','--listrule', action="store_true", help='Get all rules in json type.')
 	
 	args = parser.parse_args()
 	print(args)

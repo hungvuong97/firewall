@@ -2,7 +2,7 @@
 
 include 'include/header.php';
 $_SESSION['rule'] = 'Black list';
-if($_SESSION['rule'] == 'White list'){
+if ($_SESSION['rule'] == 'White list') {
     $_SESSION['rule'] = 'White list';
 }
 ?>
@@ -58,10 +58,14 @@ if($_SESSION['rule'] == 'White list'){
                                     <a id="tab2" class="nav-link color-a" data-toggle="tab" role="tab" href="#menu2">Danh sách luật</a>
                                 </li>
                                 <li class="nav-item margin_center">
+                                    <a id="tab3" class="nav-link color-a" data-toggle="tab" role="tab" href="#menu3">Profile</a>
+                                </li>
+                                <li class="nav-item margin_center">
                                     <form>
                                         <input type="button" class="form-check-input" value="Chuyen doi" id="" onclick="convertRule()">
                                     </form>
                                 </li>
+
                             </ul>
                             <br>
                             <div class="tab-content">
@@ -316,18 +320,12 @@ if($_SESSION['rule'] == 'White list'){
                                                     <?= $_SESSION['prefixError'] ?>
                                                 </p>
                                                 <button id="addRule" type="submit" class="btn btn-add Disable"><i class="fa fa-plus" aria-hidden="true"></i> Thêm luật</button>
-
-
                                             </form>
-
                                         </div>
                                     </div>
                                 </div>
 
                                 <div id="menu2" class="tab-pane fade">
-
-
-
                                     <ul class="nav nav-tabs" id="example-tabs" role="tablist">
                                         <li class="nav-item margin_center">
                                             <a id="tab1" class="nav-link active color-a" data-toggle="tab" role="tab" href="#submenu1">Lưu lượng vào</a>
@@ -364,7 +362,6 @@ if($_SESSION['rule'] == 'White list'){
                                                         <th>Prefix</th>
                                                         <th>Hành vi</th>
                                                         <th></th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -486,6 +483,47 @@ if($_SESSION['rule'] == 'White list'){
                                         </div>
                                     </div>
                                 </div>
+                                <div id="menu3" class="tab-pane fade">
+                                    <form action="/action_page.php">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Dịch vụ</th>
+                                                    <th scope="col">Protocol</th>
+                                                    <th scope="col">Port</th>
+                                                    <th scope="col">Input/Output</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row"><input onClick="onClick()" type="checkbox" aria-label="Checkbox for following text input"></th>
+                                                    <td>ssh</td>
+                                                    <td>udp</td>
+                                                    <td>22</td>
+                                                    <td>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">HTML</a></li>
+                                                            <li><a href="#">CSS</a></li>
+                                                            <li><a href="#">JavaScript</a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
                                 <p id="rule">
                                     <?= $_SESSION['rule'] ?>
                                 </p>
@@ -586,5 +624,9 @@ include 'include/footer.php';
                 }
             });
         }
+    }
+
+    function onClick() {
+
     }
 </script>
