@@ -1,10 +1,7 @@
 <?php
 
 include 'include/header.php';
-$_SESSION['rule'] = 'Black list';
-if ($_SESSION['rule'] == 'White list') {
-    $_SESSION['rule'] = 'White list';
-}
+
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -60,12 +57,6 @@ if ($_SESSION['rule'] == 'White list') {
                                 <li class="nav-item margin_center">
                                     <a id="tab3" class="nav-link color-a" data-toggle="tab" role="tab" href="#menu3">Profile</a>
                                 </li>
-                                <li class="nav-item margin_center">
-                                    <form>
-                                        <input type="button" class="form-check-input" value="Chuyen doi" id="" onclick="convertRule()">
-                                    </form>
-                                </li>
-
                             </ul>
                             <br>
                             <div class="tab-content">
@@ -169,6 +160,13 @@ if ($_SESSION['rule'] == 'White list') {
                                                                     <label style="margin-left: 15px;" for="input_IP1">Prefix</label>
                                                                 </td>
                                                                 <td><input id="prefix1" value="<?= $_SESSION['val']['[prefix'] ?>" type="text" disabled class="form-control" id="input_prefix" name="prefix"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label><i class="fa fa-ticket"></i>&nbsp; Blacklist/Whitelist</label></td>
+                                                                <td><select class="form-control Disable" name="Black_White" id="input_action">
+                                                                        <option value="Blacklist">Blacklist</option>
+                                                                        <option value="Whitelist">Whitelist</option>
+                                                                    </select></td>
                                                             </tr>
 
                                                         </tbody>
@@ -283,6 +281,14 @@ if ($_SESSION['rule'] == 'White list') {
                                                                     <input id="prefix2" value="<?= $_SESSION['val']['[prefix'] ?>" type="text" disabled class="form-control" id="input_prefix" placeholder="prefix" name="prefix">
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td><label><i class="fa fa-ticket"></i>&nbsp; Blacklist/Whitelist</label></td>
+                                                                <td><select class="form-control Disable" name="action" id="input_action">
+                                                                        <option value="Blacklist">Blacklist</option>
+                                                                        <option value="Whitelist">Whitelist</option>
+                                                                    </select></td>
+                                                            </tr>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -347,7 +353,7 @@ if ($_SESSION['rule'] == 'White list') {
                                         $data = json_decode($string, true);
                                         // print_r($data);
                                         $input = $data[0]["chain_rules"];
-                                        print_r($input);
+                                        // print_r($input);
                                         $output = $data[2]['chain_rules'];
                                         // print(count($data['INPUT']));
 
@@ -484,49 +490,84 @@ if ($_SESSION['rule'] == 'White list') {
                                     </div>
                                 </div>
                                 <div id="menu3" class="tab-pane fade">
-                                    <form action="/action_page.php">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col"></th>
-                                                    <th scope="col">Dịch vụ</th>
-                                                    <th scope="col">Protocol</th>
-                                                    <th scope="col">Port</th>
-                                                    <th scope="col">Input/Output</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row"><input onClick="onClick()" type="checkbox" aria-label="Checkbox for following text input"></th>
-                                                    <td>ssh</td>
-                                                    <td>udp</td>
-                                                    <td>22</td>
-                                                    <td>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="#">HTML</a></li>
-                                                            <li><a href="#">CSS</a></li>
-                                                            <li><a href="#">JavaScript</a></li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                            </tbody>
-                                        </table>
-                                    </form>
+                                    <table class="table" id="profile">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Dịch vụ</th>
+                                                <th scope="col">Protocol</th>
+                                                <th scope="col">Port</th>
+                                                <th scope="col">Input/Output</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <?php
+                                                $cnt = 0;
+                                                if (count($input) == 0) {
+                                                    echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                } else {
+                                                    foreach ($input as $key => $line) {
+                                                        if ($line[$line['protocol']]['dport'] == 22) {
+                                                            echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                            $cnt = 0;
+                                                            break;
+                                                        } else {
+                                                            $cnt++;
+                                                        }
+                                                    }
+                                                    if ($cnt > 0) {
+                                                        echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                    }
+                                                }
+
+                                                ?>
+                                                <!-- <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th> -->
+                                                <td>SSH</td>
+                                                <td>TCP</td>
+                                                <td>22</td>
+                                                <td>
+                                                    <select class="form-control Disable" name="action" id="input_action">
+                                                        <option value="Input">Input</option>
+                                                        <option value="Output">Output</option>
+                                                    </select>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <?php
+                                                $count = 0;
+
+                                                if (count($input) == 0) {
+                                                    echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                } else {
+                                                    foreach ($input as $key => $line) {
+                                                        if ($line[$line['protocol']]['dport'] == 20) {
+                                                            echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                            $count = 0;
+                                                            break;
+                                                        } else {
+                                                            $count++;
+                                                        }
+                                                    }
+                                                    if ($count > 0) {
+                                                        echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    }
+                                                }
+                                                ?>
+                                                <td>FTP</td>
+                                                <td>TCP</td>
+                                                <td>20</td>
+                                                <td>
+                                                    <select class="form-control Disable" name="action" id="input_action">
+                                                        <option value="Input">Input</option>
+                                                        <option value="Output">Output</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <p id="rule">
-                                    <?= $_SESSION['rule'] ?>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -566,6 +607,8 @@ include 'include/footer.php';
     }
     ?>
 
+
+
     function checklog() {
         var prefix1 = document.getElementById("prefix1");
         var prefix2 = document.getElementById("prefix2");
@@ -586,47 +629,54 @@ include 'include/footer.php';
 
     }
 
-    function convertRule() {
-        let rule = document.getElementById("rule").innerHTML
-        console.log(rule)
-        if (rule === "Black list") {
+    text = () => {
 
+        let table = document.getElementById("profile");
+        this.sendAjax = () => {
+            // intput_output = tr.cells[4].getElementsByTagName("select")[0];
+            // console.log(input_output)
+            console.log(this)
+            console.log(this.port, i)
             $.ajax({
-                type: "GET",
-                url: 'php/deleteBlacklist.php',
+                type: "POST",
+                url: 'php/profile.php',
+                data: {
+                    service: this.service,
+                    protocol: this.protocol,
+                    port: this.port,
+                    // input_output: input_output
+                },
                 success: function(response) {
-                    var jsonData = JSON.parse(response);
-                    if (jsonData.success == "1") {
-                        document.getElementById("input").action = "php/firewall_whitelist_input.php"
-                        document.getElementById("output").action = "php/firewall_whitelist_output.php"
-                        document.getElementById("rule").innerHTML = "White list"
-                        $("#processTable > tbody").html("")
-
-                    } else {}
+                    console.log(response, 1)
                 }
-            });
+            }, false)
 
         }
-        if (rule === "White list") {
+        for (let i = 1; i <= table.rows.length - 1; i++) {
+            let tr;
+            tr = table.rows[i];
+            for (let j = 1; j <= tr.cells.length - 1; j++) {
+                switch (j) {
+                    case 1:
+                        this.service = tr.cells[j].innerHTML;
+                        break;
+                    case 2:
+                        this.protocol = tr.cells[j].innerHTML;
+                        break;
+                    case 3:
+                        this.port = tr.cells[j].innerHTML;
+                        break;
+                }
+            }
+            console.log(port)
+            let that = this;
+            tr.cells[0].addEventListener('click', () => sendAjax(), false)
             console.log(1)
-            $.ajax({
-                type: "GET",
-                url: 'php/deleteWhitelist.php',
-                success: function(response) {
-                    var jsonData = JSON.parse(response);
-                    if (jsonData.success == "1") {
-                        document.getElementById("input").action = "php/firewall_input.php"
-                        document.getElementById("output").action = "php/firewall_output.php"
-                        document.getElementById("rule").innerHTML = "Black list"
-                        $("#processTable > tbody").html("")
 
-                    } else {}
-                }
-            });
+            // var emailTd = emailTr.cells[1];
+            // console.log(emailTd.innerHTML)
+            // var email = emailTd.innerHTML;
         }
     }
-
-    function onClick() {
-
-    }
+    text()
 </script>
