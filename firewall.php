@@ -636,7 +636,7 @@ include 'include/footer.php';
             // intput_output = tr.cells[4].getElementsByTagName("select")[0];
             // console.log(input_output)
             console.log(this)
-            console.log(this.port, i)
+            console.log(this.port)
             $.ajax({
                 type: "POST",
                 url: 'php/profile.php',
@@ -655,7 +655,10 @@ include 'include/footer.php';
         for (let i = 1; i <= table.rows.length - 1; i++) {
             let tr;
             tr = table.rows[i];
+            console.log(tr.cells[0])
+            tr.cells[0].children[0].setAttribute('id', `input${i}`)
             for (let j = 1; j <= tr.cells.length - 1; j++) {
+                // console.log(tr.cells[j].innerHTML)
                 switch (j) {
                     case 1:
                         this.service = tr.cells[j].innerHTML;
@@ -664,13 +667,13 @@ include 'include/footer.php';
                         this.protocol = tr.cells[j].innerHTML;
                         break;
                     case 3:
-                        this.port = tr.cells[j].innerHTML;
+                        tr.cells[j].setAttribute('id', `port${i}`)
+                        port = tr.cells[j].innerHTML;
                         break;
                 }
             }
-            console.log(port)
             let that = this;
-            tr.cells[0].addEventListener('click', () => sendAjax(), false)
+            $(`#input${i}`).click(() => console.log($(`#port${i}`).html()))
             console.log(1)
 
             // var emailTd = emailTr.cells[1];
