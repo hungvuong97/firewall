@@ -112,7 +112,7 @@ if ($eflag == 0) {
 	// die();
 	if ($_POST['Black_White'] == 'Blacklist') {
 		shell_exec("sudo python ../tool/python-iptables/whitelist_input.py --f ");
-		shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
+		// shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
 		$command = "sudo python ../tool/python-iptables/blacklist_output.py --protocol " . $_POST['Protocol'];
 	} else {
 		shell_exec("sudo python ../tool/python-iptables/blacklist_input.py --f ");

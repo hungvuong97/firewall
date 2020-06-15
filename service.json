@@ -1,0 +1,119 @@
+{
+    "service": [
+        {
+            "service": "Secure Shell (SSH)",
+            "protocol": "TCP",
+            "port": "22"
+        },
+        {
+            "service": " File Transfer Protocol (FTP)",
+            "protocol": "TCP",
+            "port": "20"
+        },
+        {
+            "service": " File Transfer Protocol (FTP)",
+            "protocol": "TCP",
+            "port": "21"
+        },
+        {
+            "service": "HTTP",
+            "protocol": "TCP",
+            "port": "80"
+        },
+        {
+            "service": "RTSP",
+            "protocol": "TCP",
+            "port": "554"
+        },
+        {
+            "service": "Telnet",
+            "protocol": "TCP",
+            "port": "23"
+        },
+        {
+            "service": "HTTPS",
+            "protocol": "TCP",
+            "port": "443"
+        },
+        {
+            "service": "Simple Mail Transfer Protocol (SMTP)",
+            "protocol": "TCP",
+            "port": "25"
+        },
+        {
+            "service": "Domain Name System (DNS)",
+            "protocol": "TCP",
+            "port": "53"
+        },
+        {
+            "service": "Network Time Protocol (NTP)",
+            "protocol": "UDP",
+            "port": "123"
+        },
+        {
+            "service": " Remote Desktop Protocol",
+            "protocol": "TCP",
+            "port": "3389"
+        },
+        {
+            "service": " Simple Network Management Protocol (SNMP)",
+            "protocol": "TCP",
+            "port": "161"
+        },
+        {
+            "service": " Simple Network Management Protocol (SNMP)",
+            "protocol": "TCP",
+            "port": "162"
+        },
+        {
+            "service": " Post Office Protocol (POP3)",
+            "protocol": "TCP",
+            "port": "110"
+        },
+        {
+            "service": "Network News Transport Protocol (NNTP)",
+            "protocol": "TCP",
+            "port": "119"
+        },
+        {
+            "service": " Internet Message Access Protocol (IMAP4)",
+            "protocol": "TCP",
+            "port": "143"
+        },
+        {
+            "service": "SQL Browser",
+            "protocol": "UDP",
+            "port": "1434"
+        },
+        {
+            "service": "HTTPS",
+            "protocol": "TCP",
+            "port": "443"
+        },
+        {
+            "service": "Skype for Business Server Front-End service",
+            "protocol": "TCP",
+            "port": "5060"
+        },
+        {
+            "service": "Skype for Business Server IM Conferencing service",
+            "protocol": "TCP",
+            "port": "5062"
+        },
+        {
+            "service": "Skype for Business Server Web Conferencing service",
+            "protocol": "TCP",
+            "port": "8057"
+        },
+        {
+            "service": "Skype for Business Server Web Compatibility service",
+            "protocol": "TCP",
+            "port": "8080"
+        },
+        {
+            "service": "HTTPS",
+            "protocol": "TCP",
+            "port": "443"
+        }
+    ]
+}

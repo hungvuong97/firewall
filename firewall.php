@@ -283,7 +283,7 @@ include 'include/header.php';
                                                             </tr>
                                                             <tr>
                                                                 <td><label><i class="fa fa-ticket"></i>&nbsp; Blacklist/Whitelist</label></td>
-                                                                <td><select class="form-control Disable" name="action" id="input_action">
+                                                                <td><select class="form-control Disable" name="Black_White" id="input_action">
                                                                         <option value="Blacklist">Blacklist</option>
                                                                         <option value="Whitelist">Whitelist</option>
                                                                     </select></td>
@@ -489,6 +489,14 @@ include 'include/header.php';
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                $string = file_get_contents("service.json");
+                                $json_a = json_decode($string, true);
+                                $service = $json_a['service']
+
+
+
+                                ?>
                                 <div id="menu3" class="tab-pane fade">
                                     <table class="table" id="profile">
                                         <thead>
@@ -497,74 +505,53 @@ include 'include/header.php';
                                                 <th scope="col">Dịch vụ</th>
                                                 <th scope="col">Protocol</th>
                                                 <th scope="col">Port</th>
-                                                <th scope="col">Input/Output</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <?php
+
+                                            <?php
+                                            $i = 0;
+                                            $flag = false;
+                                            foreach ($service as $key => $serv) {
+                                                echo '<tr>';
                                                 $cnt = 0;
                                                 if (count($input) == 0) {
-                                                    echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
                                                 } else {
                                                     foreach ($input as $key => $line) {
-                                                        if ($line[$line['protocol']]['dport'] == 22) {
-                                                            echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                        // print_r($i);
+                                                        // $i++;
+                                                        // print_r($line[$line['protocol']]['dport']);
+                                                        if ($line[$line['protocol']]['dport'] == $serv['port']) {
+                                                            // print_r($line[$line['protocol']]['dport'])
+                                                            $flag = true;
+                                                            print_r($i);
+                                                            echo '<th target=' . $i . ' scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
                                                             $cnt = 0;
+                                                            $i++;
                                                             break;
                                                         } else {
+                                                            // print_r($line[$line['protocol']]['dport']);
+                                                            // $i = $i + 1;
                                                             $cnt++;
                                                         }
                                                     }
+                                                    if($flag != true){
+                                                        $i++;
+                                                        $flag = false;
+
+                                                    }
                                                     if ($cnt > 0) {
-                                                        echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
                                                     }
                                                 }
+                                                echo '<td>' . $serv['service'] . '</td>';
+                                                echo '<td>' . $serv['protocol'] . '</td>';
+                                                echo '<td>' . $serv['port'] . '</td>';
+                                                echo "</tr>";
+                                            }
 
-                                                ?>
-                                                <!-- <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th> -->
-                                                <td>SSH</td>
-                                                <td>TCP</td>
-                                                <td>22</td>
-                                                <td>
-                                                    <select class="form-control Disable" name="action" id="input_action">
-                                                        <option value="Input">Input</option>
-                                                        <option value="Output">Output</option>
-                                                    </select>
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <?php
-                                                $count = 0;
-
-                                                if (count($input) == 0) {
-                                                    echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
-                                                } else {
-                                                    foreach ($input as $key => $line) {
-                                                        if ($line[$line['protocol']]['dport'] == 20) {
-                                                            echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" checked></th>';
-                                                            $count = 0;
-                                                            break;
-                                                        } else {
-                                                            $count++;
-                                                        }
-                                                    }
-                                                    if ($count > 0) {
-                                                        echo '<th scope="row"><input type="checkbox" aria-label="Checkbox for following text input" ></th>';
-                                                    }
-                                                }
-                                                ?>
-                                                <td>FTP</td>
-                                                <td>TCP</td>
-                                                <td>20</td>
-                                                <td>
-                                                    <select class="form-control Disable" name="action" id="input_action">
-                                                        <option value="Input">Input</option>
-                                                        <option value="Output">Output</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -630,55 +617,62 @@ include 'include/footer.php';
     }
 
     text = () => {
-
-        let table = document.getElementById("profile");
-        this.sendAjax = () => {
-            // intput_output = tr.cells[4].getElementsByTagName("select")[0];
-            // console.log(input_output)
-            console.log(this)
-            console.log(this.port)
-            $.ajax({
-                type: "POST",
-                url: 'php/profile.php',
-                data: {
-                    service: this.service,
-                    protocol: this.protocol,
-                    port: this.port,
-                    // input_output: input_output
-                },
-                success: function(response) {
-                    console.log(response, 1)
-                }
-            }, false)
+        // let port, protocol, service;
+        sendAjax = (tr, port, protocol, i) => {
+            console.log(i, tr.checked)
+            if (tr.checked == true) {
+                $.ajax({
+                    type: "POST",
+                    url: 'php/profile.php',
+                    data: {
+                        service: service,
+                        protocol: protocol,
+                        port: port,
+                        // input_output: input_output
+                    },
+                    success: function(response) {
+                        console.log(response, 1)
+                    }
+                }, false)
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: 'php/profile.php',
+                    data: {
+                        service: service,
+                        protocol: protocol,
+                        port: port,
+                        // input_output: input_output
+                    },
+                    success: function(response) {
+                        console.log(response, 1)
+                    }
+                }, false)
+            }
 
         }
-        for (let i = 1; i <= table.rows.length - 1; i++) {
-            let tr;
+        let table = document.getElementById("profile");
+        let tr;
+        let length = table.rows.length
+        for (let i = 1; i <= length - 1; i++) {
             tr = table.rows[i];
-            console.log(tr.cells[0])
-            tr.cells[0].children[0].setAttribute('id', `input${i}`)
             for (let j = 1; j <= tr.cells.length - 1; j++) {
-                // console.log(tr.cells[j].innerHTML)
                 switch (j) {
                     case 1:
-                        this.service = tr.cells[j].innerHTML;
+                        var service = tr.cells[j].innerHTML;
                         break;
                     case 2:
-                        this.protocol = tr.cells[j].innerHTML;
+                        var protocol = tr.cells[j].innerHTML;
                         break;
                     case 3:
-                        tr.cells[j].setAttribute('id', `port${i}`)
-                        port = tr.cells[j].innerHTML;
+                        var port = tr.cells[j].innerHTML;
                         break;
+                    case 4:
+                        var index = tr.cells[j].innerHTML
                 }
             }
-            let that = this;
-            $(`#input${i}`).click(() => console.log($(`#port${i}`).html()))
-            console.log(1)
-
-            // var emailTd = emailTr.cells[1];
-            // console.log(emailTd.innerHTML)
-            // var email = emailTd.innerHTML;
+            console.log(tr.cells[0].getAttribute("target"))
+            tr.cells[0].addEventListener('click', sendAjax.bind(this, tr.cells[0].querySelector("input[name=checkbox]"), port, protocol, index), false)
         }
     }
     text()

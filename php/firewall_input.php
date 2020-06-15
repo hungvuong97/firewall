@@ -116,12 +116,12 @@ if ($eflag == 0) {
 	//                           [--dst-ip DST_IP] [--src-port SRC_PORT]
 	//                           [--dst-port DST_PORT] [--port PORT] [--ip IP]
 	//                           [--comment COMMENT] [-f]
+	// print_r($_POST['Black_White']);
+	// die();
 	if ($_POST['Black_White'] == 'Blacklist') {
-		shell_exec("sudo python ../tool/python-iptables/whitelist_input.py --f ");
-		shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
+		// shell_exec("sudo python ../tool/python-iptables/whitelist_input.py --f ");
+		// shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
 		$command = "sudo python ../tool/python-iptables/blacklist_input.py --protocol " . $_POST['Protocol'];
-
-
 	}else{
 		shell_exec("sudo python ../tool/python-iptables/blacklist_input.py --f ");
 		shell_exec("sudo python ../tool/python-iptables/blacklist_output.py --f ");
@@ -159,7 +159,7 @@ if ($eflag == 0) {
 	}
 
 	print($command . "<br>");
-	// die();
+	die();
 	// $command = "l";
 	$shell = shell_exec($command);
 
