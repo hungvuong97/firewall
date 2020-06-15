@@ -117,11 +117,15 @@ if ($eflag == 0) {
 	//                           [--dst-port DST_PORT] [--port PORT] [--ip IP]
 	//                           [--comment COMMENT] [-f]
 	if ($_POST['Black_White'] == 'Blacklist') {
+		shell_exec("sudo python ../tool/python-iptables/whitelist_input.py --f ");
+		shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
 		$command = "sudo python ../tool/python-iptables/blacklist_input.py --protocol " . $_POST['Protocol'];
-		shell_exec("sudo python ../tool/python-iptables/manual_input.py --f ");
+
+
 	}else{
+		shell_exec("sudo python ../tool/python-iptables/blacklist_input.py --f ");
+		shell_exec("sudo python ../tool/python-iptables/blacklist_output.py --f ");
 		$command = "sudo python ../tool/python-iptables/whitelist_input.py --protocol " . $_POST['Protocol'];
-		shell_exec("sudo python ../tool/python-iptables/manual_input.py --f ");
 	}
 
 
