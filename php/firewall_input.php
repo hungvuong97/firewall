@@ -95,12 +95,6 @@ if (substr_count($_POST['port2'], ",") > 4) {
 	$eflag = 1;
 }
 
-
-
-
-
-
-
 if (strlen($_POST['prefix']) > 64) {
 	$prefixError = "Prefix phải từ 1 đến  64 kí tự";
 	$eflag = 1;
@@ -118,17 +112,8 @@ if ($eflag == 0) {
 	//                           [--comment COMMENT] [-f]
 	// print_r($_POST['Black_White']);
 	// die();
-	if ($_POST['Black_White'] == 'Blacklist') {
-		// shell_exec("sudo python ../tool/python-iptables/whitelist_input.py --f ");
-		// shell_exec("sudo python ../tool/python-iptables/whitelist_output.py --f ");
-		$command = "sudo python ../tool/python-iptables/blacklist_input.py --protocol " . $_POST['Protocol'];
-	}else{
-		shell_exec("sudo python ../tool/python-iptables/blacklist_input.py --f ");
-		shell_exec("sudo python ../tool/python-iptables/blacklist_output.py --f ");
-		$command = "sudo python ../tool/python-iptables/whitelist_input.py --protocol " . $_POST['Protocol'];
-	}
-
-
+	
+	$command = "sudo python ../tool/python-iptables/blacklist_input.py --protocol " . $_POST['Protocol'];
 	if (strlen($_POST['ip1']) != 0) {
 		$command = $command . " --src-ip " . $_POST['ip1'];
 	}
@@ -159,7 +144,6 @@ if ($eflag == 0) {
 	}
 
 	print($command . "<br>");
-	die();
 	// $command = "l";
 	$shell = shell_exec($command);
 

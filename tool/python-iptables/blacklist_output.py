@@ -9,11 +9,10 @@ def init_chain():
     chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), chain_name)
     try:
         chain.set_policy(iptc.Policy("ACCEPT"))
-
         return 0
     except Exception as e:
         print( e)
-        print( "Table Error : table.strerror()")
+        print( "Table Error : table.strerror()")    
         return 1
 
 

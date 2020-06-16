@@ -1,0 +1,32 @@
+[
+    {
+        "service": "Skype for Business Server Front-End service",
+        "protocol": "TCP",
+        "port": "0000",
+        "i_o": "Input"
+    },
+    {
+        "service": "Skype for Business Server Front-End service",
+        "protocol": "TCP",
+        "port": "5060",
+        "i_o": "Input"
+    },
+    {
+        "service": "Skype for Business Server IM Conferencing service",
+        "protocol": "TCP",
+        "port": "5062",
+        "i_o": "Input"
+    },
+    {
+        "service": "Skype for Business Server Web Conferencing service",
+        "protocol": "TCP",
+        "port": "8057",
+        "i_o": "Input"
+    },
+    {
+        "service": "Skype for Business Server Web Compatibility service",
+        "protocol": "TCP",
+        "port": "8080",
+        "i_o": "Input"
+    }
+]
