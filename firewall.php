@@ -228,7 +228,6 @@ include 'include/header.php';
                                             <?php
                                             $jsondata2 = file_get_contents('output.json');
                                             $arr_data2 = json_decode($jsondata2, true)['flag'];
-                                            print_r($arr_data2);
                                             ?>
                                             <?php
                                             // print_r($arr_data)
@@ -543,6 +542,10 @@ include 'include/header.php';
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">I/O</label>
                                             <input type="" name="I/O" class="form-control" id="" placeholder="I/O">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Target</label>
+                                            <input type="" name="target" class="form-control" id="" placeholder="Target">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

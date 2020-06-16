@@ -6,7 +6,8 @@ $formdata = [
     'service' => $_POST['service'],
     'port' => $_POST['port'],
     'protocol' => $_POST['protocol'],
-    'i/o' => $_POST['I/O']
+    'i/o' => $_POST['I/O'],
+    'target' => $_POST['target']
 ];
 $jsondata = file_get_contents($myFile);
 $arr_data = json_decode($jsondata, true);
