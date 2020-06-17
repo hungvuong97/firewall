@@ -1,7 +1,7 @@
 import argparse
 import iptc
 import filter_rule
-chain = "INPUT"
+chain = "OUTPUT"
 
 def append_rule(input_rule):
 	print "Append rule:"
@@ -34,7 +34,7 @@ def main():
 	group.add_argument('-f','--flush', action="store_true", help='Clear all rule in this chain INPUT')
 	group.add_argument('-d','--delete', type=int, help='Delete specific rule in position of this chain INPUT. Default is the first')
 	group.add_argument('-A','--append', action="store_true", help=r"""Insert rule in bottom of list (append). Your packet can face this rule after all other rules.
-						Example : python manual_input.py -A -r "{\"comment\": {\"comment\": \"Match tcp.22\"}, \"protocol\": \"tcp\", \"target\": \"ACCEPT\", \"tcp\": {\"dport\": \"22\"}}"
+						Example : python manual_output.py -A -r "{\"comment\": {\"comment\": \"Match tcp.22\"}, \"protocol\": \"tcp\", \"target\": \"ACCEPT\", \"tcp\": {\"dport\": \"22\"}}"
 						""")
 	group.add_argument('-L','--listrule', action="store_true", help='Get all rules in json type.')
 	parser.add_argument('-r','--rule', required=False,type=str,default="", help='Input rule in json type.')

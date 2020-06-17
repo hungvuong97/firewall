@@ -557,6 +557,7 @@ include 'include/header.php';
                                                 <th scope="col">Protocol</th>
                                                 <th scope="col">Port</th>
                                                 <th scope="col">I/O</th>
+                                                <th scope="col">Target</th>
                                                 <th scope="col">Xóa</th>
                                             </tr>
                                         </thead>
@@ -567,64 +568,110 @@ include 'include/header.php';
                                             foreach ($service as $key => $serv) {
                                                 echo '<tr>';
                                                 $cnt = 0;
-                                                if (count($input) == 0) {
-                                                    echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
-                                                } else {
-                                                    $i = 0;
-                                                    foreach ($input as $key => $line) {
-                                                        if ($line[$line['protocol']]['dport'] == $serv['port']) {
-                                                            echo '<th target=' . $i . ' scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
-                                                            $cnt = 0;
-                                                            break;
-                                                        } else {
-                                                            $cnt++;
+                                                if ($serv['i_o'] == 'Input') {
+                                                    if (count($input) == 0) {
+                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    } else {
+                                                        $i = 0;
+                                                        foreach ($input as $key => $line) {
+                                                            if ($line[$line['protocol']]['dport'] == $serv['port']) {
+                                                                echo '<th target=' . $i . ' scope="row"><input target=' . $i . '  type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                                $cnt = 0;
+                                                                break;
+                                                            } else {
+                                                                $cnt++;
+                                                            }
+                                                            $i++;
                                                         }
-                                                        $i++;
-                                                    }
 
-                                                    if ($cnt > 0) {
-                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        if ($cnt > 0) {
+                                                            echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        }
+                                                    }
+                                                } else {
+                                                    if (count($output) == 0) {
+                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    } else {
+                                                        $i = 0;
+                                                        foreach ($output as $key => $line) {
+                                                            if ($line[$line['protocol']]['dport'] == $serv['port']) {
+                                                                echo '<th target=' . $i . ' scope="row"><input target=' . $i . ' type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                                $cnt = 0;
+                                                                break;
+                                                            } else {
+                                                                $cnt++;
+                                                            }
+                                                            $i++;
+                                                        }
+
+                                                        if ($cnt > 0) {
+                                                            echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        }
                                                     }
                                                 }
                                                 echo '<td>' . $serv['service'] . '</td>';
                                                 echo '<td>' . $serv['protocol'] . '</td>';
                                                 echo '<td>' . $serv['port'] . '</td>';
                                                 echo '<td>' . $serv['i_o'] . '</td>';
+                                                echo '<td>' . $serv['target'] . '</td>';
                                                 echo '<td><button type="button" id="1"  onclick="deleteService(' . $serv['port'] . ')" class="btn btn-secondary" disabled>delete</button></td>';
                                                 echo "</tr>";
                                             }
                                             foreach ($manual_service as $key => $serv) {
                                                 echo '<tr>';
                                                 $cnt = 0;
-                                                if (count($input) == 0) {
-                                                    echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
-                                                } else {
-                                                    $i = 0;
-                                                    foreach ($input as $key => $line) {
-                                                        if ($line[$line['protocol']]['dport'] == $serv['port']) {
-                                                            echo '<th target=' . $i . ' scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
-                                                            $cnt = 0;
-                                                            break;
-                                                        } else {
-                                                            $cnt++;
+                                                if ($serv['i_o'] == 'Input') {
+                                                    if (count($input) == 0) {
+                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    } else {
+                                                        $i = 0;
+                                                        foreach ($input as $key => $line) {
+                                                            if ($line[$line['protocol']]['dport'] == $serv['port']) {
+                                                                echo '<th target=' . $i . ' scope="row"><input target=' . $i . ' type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                                $cnt = 0;
+                                                                break;
+                                                            } else {
+                                                                $cnt++;
+                                                            }
+                                                            $i++;
                                                         }
-                                                        $i++;
-                                                    }
 
-                                                    if ($cnt > 0) {
-                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        if ($cnt > 0) {
+                                                            echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        }
+                                                    }
+                                                } else {
+                                                    if (count($output) == 0) {
+                                                        echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input" ></th>';
+                                                    } else {
+                                                        $i = 0;
+                                                        foreach ($output as $key => $line) {
+                                                            if ($line[$line['protocol']]['dport'] == $serv['port']) {
+                                                                echo '<th target=' . $i . ' scope="row"><input target=' . $i . ' type="checkbox" name="checkbox" aria-label="Checkbox for following text input" checked></th>';
+                                                                $cnt = 0;
+                                                                break;
+                                                            } else {
+                                                                $cnt++;
+                                                            }
+                                                            $i++;
+                                                        }
+                                                        if ($cnt > 0) {
+                                                            echo '<th scope="row"><input type="checkbox" name="checkbox" aria-label="Checkbox for following text input"></th>';
+                                                        }
                                                     }
                                                 }
                                                 echo '<td>' . $serv['service'] . '</td>';
                                                 echo '<td>' . $serv['protocol'] . '</td>';
                                                 echo '<td>' . $serv['port'] . '</td>';
                                                 echo '<td>' . $serv['i_o'] . '</td>';
+                                                echo '<td>' . $serv['target'] . '</td>';
                                                 echo '<td><button type="button" id="1"  onclick="deleteService(' . $serv['port'] . ')" class="btn btn-secondary" >delete</button></td>';
                                                 echo "</tr>";
                                             }
                                             ?>
                                         </tbody>
                                     </table>
+                                    <button id="update" onclick="update()" type="button" class="btn btn-secondary">Cập nhật</button>
                                 </div>
                             </div>
                         </div>
@@ -665,8 +712,6 @@ include 'include/footer.php';
     }
     ?>
 
-
-
     function checklog() {
         var prefix1 = document.getElementById("prefix1");
         var prefix2 = document.getElementById("prefix2");
@@ -687,64 +732,67 @@ include 'include/footer.php';
 
     }
 
-    text = () => {
-        // let port, protocol, service;
-        sendAjax = (tr, port, protocol, i) => {
-            console.log(i, tr.checked)
-            if (tr.checked == true) {
-                $.ajax({
-                    type: "POST",
-                    url: 'php/profile.php',
-                    data: {
-                        service: service,
-                        protocol: protocol,
-                        port: port,
-                        // input_output: input_output
-                    },
-                    success: function(response) {
-                        console.log(response, 1)
-                    }
-                }, false)
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: 'php/deleteService.php',
-                    data: {
-                        index: i,
-
-                    },
-                    success: function(response) {
-                        console.log(response, 1)
-                    }
-                }, false)
+    var checked = [],
+        unchecked = [];
+    update = () => {
+        $.ajax({
+            type: "POST",
+            url: 'php/profile.php',
+            data: {
+                check: checked,
+                uncheck: unchecked
+            },
+            success: function(response) {
+                // console.log(response)
+                self.location = "/firewall.php"
             }
-
+        }, false)
+    }
+    sendAjax = (tr, port, protocol, i, input_output, target) => {
+        if (tr.checked == false && tr.getAttribute('target') != null) {
+            checked.push({
+                index: tr.getAttribute('target'),
+                inout: input_output
+            });
         }
-        let table = document.getElementById("profile");
-        let tr;
-        let length = table.rows.length
-        for (let i = 1; i <= length - 1; i++) {
-            tr = table.rows[i];
-            for (let j = 1; j <= tr.cells.length - 1; j++) {
-                switch (j) {
-                    case 1:
-                        var service = tr.cells[j].innerHTML;
-                        break;
-                    case 2:
-                        var protocol = tr.cells[j].innerHTML;
-                        break;
-                    case 3:
-                        var port = tr.cells[j].innerHTML;
-                        break;
-                    case 4:
-                        var index = tr.cells[j].innerHTML
-                }
-            }
-            var index = tr.cells[0].getAttribute("target");
-            tr.cells[0].addEventListener('click', sendAjax.bind(this, tr.cells[0].querySelector("input[name=checkbox]"), port, protocol, index), false)
+        if (tr.checked == true && tr.getAttribute('target') == null) {
+            unchecked.push({
+                service: service,
+                protocol: protocol,
+                port: port,
+                input_output: input_output,
+                target: target
+            })
         }
     }
-    text()
+    let table = document.getElementById("profile");
+    let tr;
+    let length = table.rows.length
+    for (let i = 1; i <= length - 1; i++) {
+        tr = table.rows[i];
+        for (let j = 1; j <= tr.cells.length - 1; j++) {
+            switch (j) {
+                case 1:
+                    var service = tr.cells[j].innerHTML;
+                    break;
+                case 2:
+                    var protocol = tr.cells[j].innerHTML;
+                    break;
+                case 3:
+                    var port = tr.cells[j].innerHTML;
+                    break;
+                case 4:
+                    var inout = tr.cells[j].innerHTML;
+                    break;
+                case 5:
+                    var target = tr.cells[j].innerHTML;
+                    break;
+            }
+        }
+        var index = tr.cells[0].querySelector("input[name=checkbox]").getAttribute('target')
+        tr.cells[0].addEventListener('click', sendAjax.bind(this, tr.cells[0].querySelector("input[name=checkbox]"), port, protocol, index, inout, target), false)
+    }
+
 
     $(document).ready(function() {
         $('#processTable1').DataTable({
@@ -778,7 +826,7 @@ include 'include/footer.php';
             type: "GET",
             url: 'php/exportJson.php',
             success: function(response) {
-                console.log(response, 1)
+                self.location = "/firewall.php"
             }
         }, false)
     }
