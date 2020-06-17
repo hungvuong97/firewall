@@ -533,7 +533,11 @@ include 'include/header.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Protocol</label>
-                                            <input type="" name="protocol" class="form-control" id="" placeholder="Protocol">
+                                            <select class="form-control Disable" name="protocol" id="input_action">
+                                                <option value="TCP">TCP</option>
+                                                <option value="UDP">UDP</option>
+                                                <option value="ICMP">ICMP</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Port</label>
@@ -541,13 +545,19 @@ include 'include/header.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">I/O</label>
-                                            <input type="" name="I/O" class="form-control" id="" placeholder="I/O">
+                                            <select class="form-control Disable" name="i/o" id="input_action">
+                                                <option value="Input">Input</option>
+                                                <option value="Output">Output</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Target</label>
-                                            <input type="" name="target" class="form-control" id="" placeholder="Target">
+                                            <select class="form-control Disable" name="target" id="input_action">
+                                                <option value="ACCEPT">ACCEPT</option>
+                                                <option value="DROP">DROP</option>
+                                            </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Tạo luật</button>
                                     </form>
                                     <table class="table" id="profile">
                                         <thead>
