@@ -172,10 +172,15 @@ include 'include/header.php';
                                                         <tr>
                                                             <td><label><i class="fa fa-ticket"></i>&nbsp; Hành vi thực hiện</label></td>
                                                             <td><select class="form-control Disable" name="action" id="input_action">
-                                                                    <option value="DROP">DROP</option>
-                                                                    <option value="ACCEPT">ACCEPT</option>
-                                                                    <option value="DENY">DENY</option>
+                                                                    <?php
+                                                                    if ($arr_data1 == 0) {
+                                                                        echo '<option value="DROP">DROP</option>';
+                                                                    } else {
+                                                                        echo '<option value="ACCEPT">ACCEPT</option>';
+                                                                    }
+                                                                    ?>
                                                                 </select></td>
+
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -299,9 +304,13 @@ include 'include/header.php';
                                                         <tr>
                                                             <td><label><i class="fa fa-ticket"></i>&nbsp; Hành vi thực hiện</label></td>
                                                             <td><select class="form-control Disable" name="action" id="input_action">
-                                                                    <option value="DROP">DROP</option>
-                                                                    <option value="ACCEPT">ACCEPT</option>
-                                                                    <option value="DENY">DENY</option>
+                                                                    <?php
+                                                                    if ($arr_data2 == 0) {
+                                                                        echo ' <option value="DROP">DROP</option>';
+                                                                    } else {
+                                                                        echo ' <option value="ACCEPT">ACCEPT</option>';
+                                                                    }
+                                                                    ?>
                                                                 </select></td>
                                                         </tr>
                                                         <tr>
