@@ -1,12 +1,5 @@
 [
     {
-        "service": "Secure Shell (SSH)",
-        "protocol": "TCP",
-        "port": "22",
-        "i_o": "Input",
-        "target": "ACCEPT"
-    },
-    {
         "service": " File Transfer Protocol (FTP)",
         "protocol": "TCP",
         "port": "20",
@@ -26,8 +19,8 @@
         "service": "HTTP",
         "protocol": "TCP",
         "port": "80",
-        "i_o": "Input",        
-        "target": "ACCEPT"
+        "i_o": "Output",        
+        "target": "DROP"
 
     },
     {
@@ -51,8 +44,8 @@
         "service": "HTTPS",
         "protocol": "TCP",
         "port": "443",
-        "i_o": "Input",
-        "target": "ACCEPT"
+        "i_o": "Output",
+        "target": "DROP"
 
     },
     {
