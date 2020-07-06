@@ -19,7 +19,7 @@
         "service": "HTTP",
         "protocol": "TCP",
         "port": "80",
-        "i_o": "Output",        
+        "i_o": "Input",        
         "target": "DROP"
 
     },

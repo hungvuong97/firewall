@@ -26,12 +26,5 @@
         "port": "8080",
         "i_o": "Input",
         "target": "ACCEPT"
-    },
-    {
-        "service": "SSH",
-        "port": "22",
-        "protocol": "TCP",
-        "i_o": "Output",
-        "target": "DROP"
     }
 ]

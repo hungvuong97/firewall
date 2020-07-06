@@ -25,18 +25,19 @@ def read_rule_json(string_rule):
         return 0
 
 
-def print_all_rule():
-    table = iptc.Table(iptc.Table.FILTER)
-    for chain in table.chains:
-        print("=======================")
-        print("Chain:", chain.name, "Policy:", chain.get_policy().name)
-        for rule in chain.rules:
-            # print rule.name,"_"*32
-            print(json.dumps(iptc.easy.decode_iptc_rule(rule), indent=4))
-            # for match in rule.matches:
-            # 	(packets, bytes) = rule.get_counters()
-            # 	print packets, bytes, match.name, match.sport
-    print("=======================")
+# def print_all_rule():
+#     table = iptc.Table(iptc.Table.FILTER)
+#     for chain in table.chains:
+#         print("=======================")
+#         print("Chain:", chain.name, "Policy:", chain.get_policy().name)
+#         for rule in chain.rules:
+#             # print rule.name,"_"*32
+#             print(json.dumps(iptc.easy.decode_iptc_rule(rule), indent=4))
+#             # for match in rule.matches:
+#             # 	(packets, bytes) = rule.get_counters()
+#             # 	print packets, bytes, match.name, match.sport
+#     print("=======================")
+    
 def json_all_chain():
     table = iptc.Table(iptc.Table.FILTER)
     table_dict  = []

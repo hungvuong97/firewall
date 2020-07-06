@@ -150,8 +150,9 @@ if ($eflag == 0) {
 
 	print_r($shell);
 	$shell = shell_exec("sudo iptables-save > /opt/iptables.conf");
-
-
+	
+	$myfile = "./input.json";
+	$arr_data = array();
 	// die();
 
 	session_destroy();
