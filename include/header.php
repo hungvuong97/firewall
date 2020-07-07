@@ -217,6 +217,12 @@ fclose($myFileLink);
                       <p><i class="fa fa-circle-o nav-ico" aria-hidden="true"></i> &nbsp; Báo cáo thống kê</p>
                     </a>
                   </li>
+
+                  <li class="nav-item has-treeview">
+                    <a href="getLog.php" class="nav-link">
+                      <p><i class="fa fa-circle-o nav-ico" aria-hidden="true"></i> &nbsp; Thống kê</p>
+                    </a>
+                  </li>
                   <!--  <li class="nav-item has-treeview">
           <a href="firewall_log.php" class="nav-link">
            <p><i class="fa fa-circle-o nav-ico" aria-hidden="true"></i> &nbsp; Nhật ký tường lửa ứng dụng</p>

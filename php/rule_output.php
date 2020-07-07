@@ -8,7 +8,6 @@ include 'config.php';
 	$shell = shell_exec("sudo iptables-save > /opt/iptables.conf");
 	$_SESSION['notification']="Đã xóa luật thành công";
 
-	$newURL = HOST."rule.php";
+	$newURL = HOST."firewall.php";
 	header('Location: '.$newURL);
-	
 ?>

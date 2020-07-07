@@ -2,6 +2,10 @@
 
 // $shell = shell_exec("sudo iptables-save > /opt/iptables.conf");
 // die();
+// $command = "sudo service ufw status";
+// $shell = shell_exec($command);
+// $check = strpos($shell, 'active');
+// die();
 include 'config.php';
 session_start();
 // print_r($_POST);
@@ -137,21 +141,20 @@ if ($eflag == 0) {
 	}
 
 	if (strlen($_POST['prefix']) != 0) {
-		$command = $command . " --log bkcs-" . $_POST['prefix'];
+		$command = $command . " --log bkcs-Input" . $_POST['prefix'];
 	} else {
 
-		$command = $command . " --log bkcs-";
+		$command = $command . " --log bkcs-Input";
 	}
 
-	print($command . "<br>");
 	// $command = "l";
 	$shell = shell_exec($command);
-
-
-	print_r($shell);
+	// print_r($shell);
+	// die();
 	$shell = shell_exec("sudo iptables-save > /opt/iptables.conf");
-
-
+	
+	$myfile = "./input.json";
+	$arr_data = array();
 	// die();
 
 	session_destroy();

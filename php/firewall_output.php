@@ -139,6 +139,7 @@ if ($eflag == 0) {
 
 	print($command . "<br>");
 	// $command = "l";
+
 	$shell = shell_exec($command);
 
 	print_r($shell);

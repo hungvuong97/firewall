@@ -8,11 +8,27 @@ $checked = $_POST['check'];
 $unchecked = $_POST['uncheck'];
 // print_r($unchecked);
 
+
+$data = file_get_contents('../manual_service.json');
+$json_arr = json_decode($data, true);
+$arr_index = [];
+foreach ($json_arr as $key => $value) {
+    if ($value['port'] == $_POST['port']) {
+        $arr_index = $key;
+    }
+}
+// echo $arr_index;
+unset($json_arr[$arr_index]);
+
+$json_arr = array_values($json_arr);
+file_put_contents('../manual_service.json', json_encode($json_arr));
+
+
 $countUnCheck = count($unchecked);
 // print_r($countUnCheck);
 if ($countUnCheck > 0) {
     for ($i = 0; $i <= $countUnCheck - 1; $i++) {
-        print_r($unchecked[$i]['input_output']);
+
         if ($unchecked[$i]['input_output'] == 'Input') {
             $command = 'sudo python ../tool/python-iptables/manual_input.py -A -r "{\"comment\": {\"comment\": \"Match ' . $unchecked[$i]['service'] . '\"}, \"protocol\": \"' . $unchecked[$i]['protocol'] . '\", \"target\": \"' . $unchecked[$i]['target'] . '\", \"tcp\": {\"dport\": \"' . $unchecked[$i]['port'] . '\"}}"';
             shell_exec($command);
