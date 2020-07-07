@@ -43,6 +43,18 @@ include 'include/header.php';
 
                                             <canvas id="myChart" style="width: 100%; height: 400px;"></canvas>
                                         </div>
+                                        <div class="col-md-12">
+
+                                            <canvas id="myChart1" style="width: 100%; height: 400px;"></canvas>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <canvas id="myChart2" style="width: 100%; height: 400px;"></canvas>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <canvas id="myChart3" style="width: 100%; height: 400px;"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +81,7 @@ include 'include/footer.php';
 ?>
 <!-- AdminLTE for demo purposes -->
 <script src="admin_asset_web/dist/js/demo.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     document.getElementById("tab<?= $_SESSION['logtab'] ?>").click();
 
     function tabFun(i) {
@@ -90,41 +102,104 @@ include 'include/footer.php';
     if (x == 5) {
         document.getElementById("tab5").click();
     }
-</script>
+</script> -->
 
 <script src="admin_asset_web/plugins/js/Chart.js"></script>
 <script type="text/javascript">
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [80, 22, 21, 8080],
-            datasets: [{
-                label: 'Số lượng thiết bị truy cập dịch vụ',
-                data: [3, 6, 2, 1],
-                backgroundColor: '#638b94',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        maxRotation: 90,
-                        minRotation: 80
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    let mychart = (label, data, mychart, text) => {
+        var ctx = document.getElementById(`${mychart}`);
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: text,
+                    data: data,
+                    backgroundColor: '#638b94',
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 80
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
 
-    Chart.defaults.global.defaultFontColor = '#dcf3ff';
+        Chart.defaults.global.defaultFontColor = '#dcf3ff';
+    }
+    getLog = () => {
+        $.ajax({
+            type: "GET",
+            url: 'php/getLog.php',
+            success: function(response) {
+                res = JSON.parse(response);
+                let label = [],
+                    data = [];
+                let ipinput = res[0]
+                if (ipinput.length > 0) {
+                    for (let i = 0; i < ipinput.length; i++) {
+                        label.push(ipinput[i]['ip'])
+                        data.push(ipinput[i]['count'])
+                    }
+                    let myChart = 'myChart';
+                    let text = 'Số lượng thiết bị truy cập địa chỉ IP Input'
+                    mychart(label, data, myChart, text);
+                }
+                label = [];
+                data = [];
+                let ipoutput = res[1];
+                if (ipoutput.length > 0) {
+                    for (let i = 0; i < ipoutput.length; i++) {
+                        label.push(ipoutput[i]['ip'])
+                        data.push(ipoutput[i]['count'])
+                    }
+                    let myChart = 'myChart1';
+                    let text = 'Số lượng thiết bị truy cập địa chỉ IP Output'
+                    mychart(label, data, myChart, text);
+                }
+                label = [];
+                data = [];
+                let portinput = res[2];
+                if (portinput.length > 0) {
+                    for (let i = 0; i < portinput.length; i++) {
+
+                        label.push(portinput[i]['port'])
+                        data.push(portinput[i]['count'])
+                    }
+                    let myChart = 'myChart2';
+                    let text = 'Số lượng thiết bị truy cập dịch vụ Input'
+                    console.log(label, data)
+                    mychart(label, data, myChart, text);
+                }
+                label = [];
+                data = [];
+                let portoutput = res[3];
+                if (portoutput.length > 0) {
+                    for (let i = 0; i < portoutput.length; i++) {
+                        label.push(portoutput[i]['port'])
+                        data.push(portoutput[i]['count'])
+                    }
+                    let myChart = 'myChart3';
+                    let text = 'Số lượng thiết bị truy cập dịch vụ Output'
+                    mychart(label, data, myChart, text);
+                }
+
+            }
+        }, false)
+    }
+    getLog();
 </script>
 <script src="admin_asset_web/plugins/js/Chart.js"></script>
 <script src="admin_asset_web/plugins/js/canvasjs.min.js"></script>

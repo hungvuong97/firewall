@@ -112,16 +112,34 @@ if ($eflag == 0) {
 	//                           [--comment COMMENT] [-f]
 	// print_r($_POST['Black_White']);
 	// die();
-	
+
 	$command = "sudo python ../tool/python-iptables/whitelist_input.py --protocol " . $_POST['Protocol'];
 	if (strlen($_POST['ip1']) != 0) {
 		$command = $command . " --src-ip " . $_POST['ip1'];
+		$myFile = '../ip_input.json';
+		$formdata = [
+			'ip' => $_POST['ip1']
+		];
+		$jsondata = file_get_contents($myFile);
+		$arr_data = json_decode($jsondata, true);
+		array_push($arr_data, $formdata);
+		$jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+		file_put_contents($myFile, $jsondata);
 	}
 
 
 
 	if (strlen($_POST['ip2']) != 0) {
 		$command = $command . " --dst-ip " . $_POST['ip2'];
+		$myFile = '../ip_input.json';
+		$formdata = [
+			'ip' => $_POST['ip2']
+		];
+		$jsondata = file_get_contents($myFile);
+		$arr_data = json_decode($jsondata, true);
+		array_push($arr_data, $formdata);
+		$jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+		file_put_contents($myFile, $jsondata);
 	}
 
 	if (strlen($_POST['port']) != 0) {

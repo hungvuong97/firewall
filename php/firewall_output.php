@@ -112,10 +112,28 @@ if ($eflag == 0) {
 	$command = "sudo python ../tool/python-iptables/blacklist_output.py --protocol " . $_POST['Protocol'];
 	if (strlen($_POST['ip1']) != 0) {
 		$command = $command . " --src-ip " . $_POST['ip1'];
+		$myFile = '../ip_output.json';
+		$formdata = [
+			'ip' => $_POST['ip1']
+		];
+		$jsondata = file_get_contents($myFile);
+		$arr_data = json_decode($jsondata, true);
+		array_push($arr_data, $formdata);
+		$jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+		file_put_contents($myFile, $jsondata);
 	}
 
 	if (strlen($_POST['ip2']) != 0) {
 		$command = $command . " --dst-ip " . $_POST['ip2'];
+		$myFile = '../ip_output.json';
+		$formdata = [
+			'ip' => $_POST['ip2']
+		];
+		$jsondata = file_get_contents($myFile);
+		$arr_data = json_decode($jsondata, true);
+		array_push($arr_data, $formdata);
+		$jsondata = json_encode($arr_data, JSON_PRETTY_PRINT);
+		file_put_contents($myFile, $jsondata);
 	}
 
 	if (strlen($_POST['port']) != 0) {
