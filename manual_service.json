@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "service": "HTTPS",
+        "port": "443",
+        "protocol": "TCP",
+        "i_o": "Output",
+        "target": "ACCEPT"
+    },
+    {
+        "service": "HTTPS",
+        "port": "443",
+        "protocol": "TCP",
+        "i_o": "Output",
+        "target": "DROP"
+    }
+]

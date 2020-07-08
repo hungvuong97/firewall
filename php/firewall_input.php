@@ -1,11 +1,4 @@
 <?php
-
-// $shell = shell_exec("sudo iptables-save > /opt/iptables.conf");
-// die();
-// $command = "sudo service ufw status";
-// $shell = shell_exec($command);
-// $check = strpos($shell, 'active');
-// die();
 include 'config.php';
 session_start();
 // print_r($_POST);
@@ -181,6 +174,7 @@ if ($eflag == 0) {
 
 	$_SESSION['notification'] = "Thêm luật thành công vào IPS";
 	$_SESSION['rule']  = 'White list';
+	print_r($_SESSION['notification']);
 	$newURL = HOST . "firewall.php";
 	header('Location: ' . $newURL);
 } else {

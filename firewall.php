@@ -1,10 +1,6 @@
 <?php
-
+session_start();
 include 'include/header.php';
-$command = "sudo service ufw status";
-$shell = shell_exec($command);
-$check = strpos($shell, 'inactive');
-print_r($check)
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -48,31 +44,7 @@ print_r($check)
 
                         ?>
 
-
-                        <?php
-                        if ($check) {
-                        ?>
-                            <center>
-                                <div class="alert alert-success">
-                                    <?= $check ?>
-                                    <br>
-                                </div>
-                            </center>
-                        <?php
-                        } else {
-                        ?>
-                            <center>
-                                <div class="alert alert-success">
-                                    <?= $check ?>
-                                    <br>
-                                </div>
-                            </center>
-                        <?php
-                        }
-                        session_destroy();
-                        session_start();
-
-                        ?>
+                        <p> <?= $_SESSION['notification'] ?></p>
                         <div class="container">
 
                             <ul class="nav nav-tabs" id="example-tabs" role="tablist">
